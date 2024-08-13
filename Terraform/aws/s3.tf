@@ -8,9 +8,10 @@ resource "aws_s3_bucket" "data" {
   acl           = "public-read"
   force_destroy = true
   tags = {
-    Name                 = "${local.resource_prefix.value}-data"
-    Environment          = local.resource_prefix.value
-    git_file             = "terraform/aws/s3.tf"
+    Name        = "${local.resource_prefix.value}-data"
+    Environment = local.resource_prefix.value
+    git_file    = "terraform/aws/s3.tf"
+    git_org     = "fl-nch"
   }
   versioning {
     enabled = "${var.versioning_enabled}"

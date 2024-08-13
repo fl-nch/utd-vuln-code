@@ -22,13 +22,15 @@ resource google_compute_instance "server" {
     serial-port-enable     = true
   }
   labels = {
-    git_file             = "terraform/gcp/instances.tf"
+    git_file = "terraform/gcp/instances.tf"
+    git_org  = "fl-nch"
   }
 }
 
 resource google_compute_disk "unencrypted_disk" {
   name = "tg-${var.environment}-disk"
   labels = {
-    git_file             = "terraform/gcp/instances.tf"
+    git_file = "terraform/gcp/instances.tf"
+    git_org  = "fl-nch"
   }
 }

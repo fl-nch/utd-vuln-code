@@ -3,8 +3,9 @@ resource aws_ecr_repository "repository" {
   image_tag_mutability = "MUTABLE"
 
   tags = {
-    Name                 = "${local.resource_prefix.value}-repository"
-    git_file             = "terraform/aws/ecr.tf"
+    Name     = "${local.resource_prefix.value}-repository"
+    git_file = "terraform/aws/ecr.tf"
+    git_org  = "fl-nch"
   }
 }
 

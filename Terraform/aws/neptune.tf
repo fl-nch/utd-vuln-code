@@ -8,7 +8,8 @@ resource "aws_neptune_cluster" "default" {
   apply_immediately                   = true
   storage_encrypted                   = false
   tags = {
-    git_file             = "terraform/aws/neptune.tf"
+    git_file = "terraform/aws/neptune.tf"
+    git_org  = "fl-nch"
   }
 }
 
@@ -20,7 +21,8 @@ resource "aws_neptune_cluster_instance" "default" {
   apply_immediately  = true
   #publicly_accessible                = true # No longer supported, API returns create error. See https://docs.aws.amazon.com/neptune/latest/userguide/api-instances.html#CreateDBInstance
   tags = {
-    git_file             = "terraform/aws/neptune.tf"
+    git_file = "terraform/aws/neptune.tf"
+    git_org  = "fl-nch"
   }
 }
 

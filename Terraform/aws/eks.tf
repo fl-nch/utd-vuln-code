@@ -19,7 +19,8 @@ resource aws_iam_role "iam_for_eks" {
   name               = "${local.resource_prefix.value}-iam-for-eks"
   assume_role_policy = data.aws_iam_policy_document.iam_policy_eks.json
   tags = {
-    git_file             = "terraform/aws/eks.tf"
+    git_file = "terraform/aws/eks.tf"
+    git_org  = "fl-nch"
   }
 }
 
@@ -38,8 +39,9 @@ resource aws_vpc "eks_vpc" {
   enable_dns_hostnames = true
   enable_dns_support   = true
   tags = {
-    Name                 = "${local.resource_prefix.value}-eks-vpc"
-    git_file             = "terraform/aws/eks.tf"
+    Name     = "${local.resource_prefix.value}-eks-vpc"
+    git_file = "terraform/aws/eks.tf"
+    git_org  = "fl-nch"
   }
 }
 
@@ -53,6 +55,7 @@ resource aws_subnet "eks_subnet1" {
     "kubernetes.io/cluster/${local.eks_name.value}"  = "shared"
     git_file                                         = "terraform/aws/eks.tf"
     "kubernetes.io/cluster/$${local.eks_name.value}" = "shared"
+    git_org                                          = "fl-nch"
   }
 }
 
@@ -66,6 +69,7 @@ resource aws_subnet "eks_subnet2" {
     "kubernetes.io/cluster/${local.eks_name.value}"  = "shared"
     git_file                                         = "terraform/aws/eks.tf"
     "kubernetes.io/cluster/$${local.eks_name.value}" = "shared"
+    git_org                                          = "fl-nch"
   }
 }
 
@@ -83,7 +87,8 @@ resource aws_eks_cluster "eks_cluster" {
     "aws_iam_role_policy_attachment.policy_attachment-AmazonEKSServicePolicy",
   ]
   tags = {
-    git_file             = "terraform/aws/eks.tf"
+    git_file = "terraform/aws/eks.tf"
+    git_org  = "fl-nch"
   }
 }
 
