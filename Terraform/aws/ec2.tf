@@ -19,8 +19,9 @@ export AWS_DEFAULT_REGION=us-west-2
 echo "<h1>Deployed via Terraform</h1>" | sudo tee /var/www/html/index.html
 EOF
   tags = {
-    Name                 = "${local.resource_prefix.value}-ec2"
-    git_file             = "terraform/aws/ec2.tf"
+    Name     = "${local.resource_prefix.value}-ec2"
+    git_file = "terraform/aws/ec2.tf"
+    git_org  = "fl-nch"
   }
 }
 
@@ -30,8 +31,9 @@ resource "aws_ebs_volume" "web_host_storage" {
   #encrypted         = false  # Setting this causes the volume to be recreated on apply 
   size = 1
   tags = {
-    Name                 = "${local.resource_prefix.value}-ebs"
-    git_file             = "terraform/aws/ec2.tf"
+    Name     = "${local.resource_prefix.value}-ebs"
+    git_file = "terraform/aws/ec2.tf"
+    git_org  = "fl-nch"
   }
 }
 
@@ -40,8 +42,9 @@ resource "aws_ebs_snapshot" "example_snapshot" {
   volume_id   = "${aws_ebs_volume.web_host_storage.id}"
   description = "${local.resource_prefix.value}-ebs-snapshot"
   tags = {
-    Name                 = "${local.resource_prefix.value}-ebs-snapshot"
-    git_file             = "terraform/aws/ec2.tf"
+    Name     = "${local.resource_prefix.value}-ebs-snapshot"
+    git_file = "terraform/aws/ec2.tf"
+    git_org  = "fl-nch"
   }
 }
 
@@ -80,7 +83,8 @@ resource "aws_security_group" "web-node" {
   }
   depends_on = [aws_vpc.web_vpc]
   tags = {
-    git_file             = "terraform/aws/ec2.tf"
+    git_file = "terraform/aws/ec2.tf"
+    git_org  = "fl-nch"
   }
 }
 
@@ -89,8 +93,9 @@ resource "aws_vpc" "web_vpc" {
   enable_dns_hostnames = true
   enable_dns_support   = true
   tags = {
-    Name                 = "${local.resource_prefix.value}-vpc"
-    git_file             = "terraform/aws/ec2.tf"
+    Name     = "${local.resource_prefix.value}-vpc"
+    git_file = "terraform/aws/ec2.tf"
+    git_org  = "fl-nch"
   }
 }
 
@@ -101,8 +106,9 @@ resource "aws_subnet" "web_subnet" {
   map_public_ip_on_launch = true
 
   tags = {
-    Name                 = "${local.resource_prefix.value}-subnet"
-    git_file             = "terraform/aws/ec2.tf"
+    Name     = "${local.resource_prefix.value}-subnet"
+    git_file = "terraform/aws/ec2.tf"
+    git_org  = "fl-nch"
   }
 }
 
@@ -113,8 +119,9 @@ resource "aws_subnet" "web_subnet2" {
   map_public_ip_on_launch = true
 
   tags = {
-    Name                 = "${local.resource_prefix.value}-subnet2"
-    git_file             = "terraform/aws/ec2.tf"
+    Name     = "${local.resource_prefix.value}-subnet2"
+    git_file = "terraform/aws/ec2.tf"
+    git_org  = "fl-nch"
   }
 }
 
@@ -123,8 +130,9 @@ resource "aws_internet_gateway" "web_igw" {
   vpc_id = aws_vpc.web_vpc.id
 
   tags = {
-    Name                 = "${local.resource_prefix.value}-igw"
-    git_file             = "terraform/aws/ec2.tf"
+    Name     = "${local.resource_prefix.value}-igw"
+    git_file = "terraform/aws/ec2.tf"
+    git_org  = "fl-nch"
   }
 }
 
@@ -132,8 +140,9 @@ resource "aws_route_table" "web_rtb" {
   vpc_id = aws_vpc.web_vpc.id
 
   tags = {
-    Name                 = "${local.resource_prefix.value}-rtb"
-    git_file             = "terraform/aws/ec2.tf"
+    Name     = "${local.resource_prefix.value}-rtb"
+    git_file = "terraform/aws/ec2.tf"
+    git_org  = "fl-nch"
   }
 }
 
@@ -163,8 +172,9 @@ resource "aws_network_interface" "web-eni" {
   private_ips = ["172.16.10.100"]
 
   tags = {
-    Name                 = "${local.resource_prefix.value}-primary_network_interface"
-    git_file             = "terraform/aws/ec2.tf"
+    Name     = "${local.resource_prefix.value}-primary_network_interface"
+    git_file = "terraform/aws/ec2.tf"
+    git_org  = "fl-nch"
   }
 }
 
@@ -176,9 +186,10 @@ resource "aws_flow_log" "vpcflowlogs" {
   vpc_id               = aws_vpc.web_vpc.id
 
   tags = {
-    Name                 = "${local.resource_prefix.value}-flowlogs"
-    Environment          = local.resource_prefix.value
-    git_file             = "terraform/aws/ec2.tf"
+    Name        = "${local.resource_prefix.value}-flowlogs"
+    Environment = local.resource_prefix.value
+    git_file    = "terraform/aws/ec2.tf"
+    git_org     = "fl-nch"
   }
 }
 
@@ -187,9 +198,10 @@ resource "aws_s3_bucket" "flowbucket" {
   force_destroy = true
 
   tags = {
-    Name                 = "${local.resource_prefix.value}-flowlogs"
-    Environment          = local.resource_prefix.value
-    git_file             = "terraform/aws/ec2.tf"
+    Name        = "${local.resource_prefix.value}-flowlogs"
+    Environment = local.resource_prefix.value
+    git_file    = "terraform/aws/ec2.tf"
+    git_org     = "fl-nch"
   }
   server_side_encryption_configuration {
     rule {
@@ -197,10 +209,10 @@ resource "aws_s3_bucket" "flowbucket" {
         sse_algorithm = "AES256"
       }
     }
-  }  
+  }
   versioning {
     enabled = true
-  }  
+  }
 }
 
 output "ec2_public_dns" {

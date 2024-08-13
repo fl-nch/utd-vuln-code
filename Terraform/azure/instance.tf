@@ -28,8 +28,9 @@ resource azurerm_linux_virtual_machine "linux_machine" {
   }
 
   tags = {
-    environment          = var.environment
-    git_file             = "terraform/azure/instance.tf"
+    environment = var.environment
+    git_file    = "terraform/azure/instance.tf"
+    git_org     = "fl-nch"
   }
 }
 
@@ -54,7 +55,8 @@ resource azurerm_windows_virtual_machine "windows_machine" {
   }
 
   tags = {
-    environment          = var.environment
-    git_file             = "terraform/azure/instance.tf"
+    environment = var.environment
+    git_file    = "terraform/azure/instance.tf"
+    git_org     = "fl-nch"
   }
 }

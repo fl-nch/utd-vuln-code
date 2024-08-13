@@ -17,7 +17,8 @@ resource "aws_iam_role" "iam_for_lambda" {
 }
 EOF
   tags = {
-    git_file             = "terraform/aws/lambda.tf"
+    git_file = "terraform/aws/lambda.tf"
+    git_org  = "fl-nch"
   }
 }
 
@@ -39,6 +40,7 @@ resource "aws_lambda_function" "analysis_lambda" {
     }
   }
   tags = {
-    git_file             = "terraform/aws/lambda.tf"
+    git_file = "terraform/aws/lambda.tf"
+    git_org  = "fl-nch"
   }
 }

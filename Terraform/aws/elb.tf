@@ -26,7 +26,8 @@ resource "aws_elb" "weblb" {
   connection_draining_timeout = 400
 
   tags = {
-    Name                 = "foobar-terraform-elb"
-    git_file             = "terraform/aws/elb.tf"
+    Name     = "foobar-terraform-elb"
+    git_file = "terraform/aws/elb.tf"
+    git_org  = "fl-nch"
   }
 }

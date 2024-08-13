@@ -54,6 +54,7 @@ resource "azurerm_application_gateway" "network" {
     backend_http_settings_name = local.http_setting_name
   }
   tags = {
-    git_file             = "terraform/azure/application_gateway.tf"
+    git_file = "terraform/azure/application_gateway.tf"
+    git_org  = "fl-nch"
   }
 }
